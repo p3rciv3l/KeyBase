@@ -21,16 +21,16 @@ use keybase;
 -- Put your DDL 
 CREATE TABLE GeneralUser
 (
-    UserID           STRING PRIMARY KEY,
-    CardID           STRING,
-    BiometricID      STRING,
-    FeatureID        STRING,
-    FirstName        string,
-    LastName         string,
+    UserID           VARCHAR (10) PRIMARY KEY,
+    CardID           TEXT,
+    BiometricID      VARCHAR (10),
+    FeatureID        TEXT,
+    FirstName        TEXT,
+    LastName         TEXT,
     DateOfBirth      DATE,
-    IPAddress        string,
-    Username         string,
-    Password         string,
+    IPAddress        TEXT,
+    Username         TEXT,
+    Password         TEXT,
     RegistrationDate DATE
 );
 
@@ -77,9 +77,9 @@ insert into GeneralUser (UserID, CardID, BiometricID, FeatureID, FirstName, Last
 
 CREATE TABLE LoginInfo
 (
-    BiometricID         STRING PRIMARY KEY,
+    BiometricID         TEXT,
     TwoFactorAuth       BOOL,
-    TypeofSecondaryAuth string,
+    TypeofSecondaryAuth TEXT,
     DateOfLastLogin     DATE
 );
 
@@ -164,10 +164,10 @@ values ('709-tSV-qxt', 1, 'string', '2021-02-25');
 
 CREATE TABLE Personal
 (
-    UserID           STRING PRIMARY KEY,
-    CardID           STRING,
-    CreditCardNum            INTEGER,
-    CreditCardCVV            INTEGER,
+    UserID           VARCHAR (10) PRIMARY KEY,
+    CardID           VARCHAR (10),
+    CreditCardNum            TEXT,
+    CreditCardCVV            TEXT,
     CreditCardExpirationDate DATE
 );
 
@@ -214,7 +214,7 @@ insert into Personal (UserID, CardID, CreditCardNum, CreditCardCVV, CreditCardEx
 
 CREATE TABLE Teams
 (
-    TeamID           STRING PRIMARY KEY,
+    TeamID           VARCHAR (10) PRIMARY KEY,
     TeamName         TEXT,
     EmployeeCount    INTEGER,
     ZipCode          INTEGER,
@@ -266,10 +266,10 @@ insert into Teams (TeamID, TeamName, EmployeeCount, ZipCode, City, State, Countr
 
 CREATE TABLE Businesses
 (
-    BusinessID       TEXT PRIMARY KEY,
+    BusinessID       VARCHAR (10) PRIMARY KEY,
     BusinessName     TEXT,
-    EmployeeCount    INTEGER,
-    ZipCode          INTEGER,
+    EmployeeCount    INTEGER (10),
+    ZipCode          VARCHAR (10),
     City             TEXT,
     State            TEXT,
     Country          TEXT
@@ -366,11 +366,11 @@ insert into PersonalFeatures (FeatureID, PasswordStrength, LocalPasswordReuse) v
 
 CREATE TABLE TeamFeatures
 (
-    FeatureID                                 STRING,
-    PasswordStrength                          string,
+    FeatureID                                 TEXT,
+    PasswordStrength                          TEXT,
     PasswordReuseWithinTeam BOOL,
     PasswordSharingAbility BOOL,
-    PasswordStrengthRelatedToInternalProducts string
+    PasswordStrengthRelatedToInternalProducts TEXT
 );
 
 insert into TeamFeatures (FeatureID, PasswordStrength, PasswordReuseWithinTeam, PasswordSharingAbility, PasswordStrengthRelatedToInternalProducts) values ('756-426', 'Okay', 1, 0, 'Okay');
@@ -416,12 +416,12 @@ insert into TeamFeatures (FeatureID, PasswordStrength, PasswordReuseWithinTeam, 
 
 CREATE TABLE BusinessFeatures
 (
-    FeatureID                                 STRING,
-    PasswordStrength                          string,
+    FeatureID                                 TEXT,
+    PasswordStrength                          TEXT,
     PasswordReuseWithinBusiness BOOL,
     PasswordSharingAbility BOOL,
-    PasswordStrengthRelatedToInternalProducts string,
-    PasswordLeaked                            string
+    PasswordStrengthRelatedToInternalProducts TEXT,
+    PasswordLeaked                            TEXT
 );
 
 insert into BusinessFeatures (FeatureID, PasswordStrength, PasswordReuseWithinBusiness, PasswordSharingAbility, PasswordStrengthRelatedToInternalProducts, PasswordLeaked) values ('937-537', 'Weak', 1, 1, 'Weak', 1);
