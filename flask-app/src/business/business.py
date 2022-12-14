@@ -40,7 +40,7 @@ def get_small_businesses(employee_count):
 
     # use cursor to query the database for businesses that have an employee count that is less than the employee count entered
     cursor.execute(
-        'select BusinessID, BusinessName, EmployeeCount, ZipCode, City, State, Country from Businesses where EmployeeCount < {employee_count}'.format(
+        'select BusinessID, BusinessName, EmployeeCount, ZipCode, City, State, Country from Businesses WHERE EmployeeCount < {employee_count}'.format(
             employee_count=employee_count))
 
     # grab the column headers from the returned data
@@ -119,3 +119,19 @@ def get_all_class(employee_count):
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+
+# Get all people from personal
+@business.route('/business', methods=['GET'])
+def get_employee_num():
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT * FROM Businesses')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response

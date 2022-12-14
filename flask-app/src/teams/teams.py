@@ -14,7 +14,7 @@ def update_name():
     cursor.execute(
         'UPDATE Teams SET TeamName = "{TeamName}" WHERE TeamID = "{TeamID}"; '.format(TeamName=TeamName, TeamID=TeamID))
     db.get_db().commit()
-    return 'Team with id "{id}" has new name "{name}"'.format(TeamName=TeamName, TeamID=TeamID)
+    return 'Team with id "{TeamID}" has new name "{TeamName}"'.format(TeamName=TeamName, TeamID=TeamID)
 
 
 # get the top 5 teams with the highest employee count
